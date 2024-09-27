@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Player Profiles</title>
+    <style>body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+    
+    header {
+        background-color: #333;
+        color: #fff;
+        padding: 1rem;
+        text-align: center;
+    }
+    
+    #player-profiles {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 2rem;
+    }
+    
+    .profile {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin: 1rem;
+        padding: 1rem;
+        width: 200px;
+        text-align: center;
+    }
+    
+    .profile img {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Cricket Player Profiles</h1>
+    </header>
+    <main>
+        <section id="player-profiles">
+            <!-- Player profiles will be inserted here -->
+        </section>
+    </main>
+    <script>const players = [
+        {
+            name: "Sachin Tendulkar",
+            image: "sachin.jpg",
+            achievements: "Most runs in international cricket."
+        },
+        {
+            name: "Virat Kohli",
+            image: "virat.jpg",
+            achievements: "Fastest to 8000, 9000, 10000 runs in ODIs."
+        }
+    ];
+    
+    const profilesContainer = document.getElementById('player-profiles');
+    
+    players.forEach(player => {
+        const profile = document.createElement('div');
+        profile.classList.add('profile');
+        
+        profile.innerHTML = `
+            <img src="${player.image}" alt="${player.name}">
+            <h2>${player.name}</h2>
+            <p>${player.achievements}</p>
+        `;
+        
+        profilesContainer.appendChild(profile);
+    });
+    </script>
+</body>
+</html>

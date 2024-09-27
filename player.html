@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Profile</title>
+    <link rel="stylesheet" href="C:\Users\Lenovo\OneDrive - SUSTAINOMETRIC\Desktop\project 3\style1.css">
+</head>
+<body>
+    <header>
+        <h1 id="player-name">Player Name</h1>
+        <a href="index.html">Back to Home</a>
+    </header>
+
+    <section id="player-details">
+        <!-- Detailed player information will go here -->
+        <img id="player-image" alt="Player Image">
+        <div id="player-info">
+            <h2>About</h2>
+            <p id="player-bio"></p>
+            <h3>Career Statistics</h3>
+            <ul id="player-stats"></ul>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Cricket Profiles</p>
+    </footer>
+
+    <script>document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const playerName = urlParams.get('name');
+        
+        fetch('data/players.json')
+            .then(response => response.json())
+            .then(players => {
+                const player = players.find(p => p.name === playerName);
+                if (player) {
+                    document.getElementById('player-name').textContent = player.name;
+                    document.getElementById('player-image').src = player.image;
+                    document.getElementById('player-bio').textContent = player.bio;
+                    document.getElementById('player-stats').innerHTML = `
+                        <li>Matches: ${player.stats.matches}</li>
+                        <li>Runs: ${player.stats.runs}</li>
+                        <li>Average: ${player.stats.average}</li>
+                    `;
+                }
+            });
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Player Profiles</title>
+<style>* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+header {
+    background-color: #0275d8;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+#search {
+    margin-top: 20px;
+    padding: 10px;
+    width: 50%;
+    font-size: 18px;
+}
+
+#featured-players {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.player-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    margin: 10px;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.player-card img {
+    width: 100%;
+    height: auto;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #0275d8;
+    color: white;
+}
+</style>
+</head>
+<body>
+    <header>
+        <h1>Cricket Player Profiles</h1>
+        <input type="text" id="search" placeholder="Search for players...">
+        <a href="player.html">Go Directly To Profile</a>
+    </header>
+    
+    <section id="featured-players">
+        <!-- Player cards will be dynamically generated here -->
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Cricket Profiles</p>
+    </footer>
+
+    <script>[
+        {
+            "name": "Virat Kohli",
+            "image": "images/player1.jpg",
+            "bio": "Virat Kohli is an Indian cricketer and the former captain of the Indian national team.",
+            "stats": {
+                "matches": 254,
+                "runs": 12169,
+                "average": 59.07
+            }
+        },
+        {
+            "name": "Steve Smith",
+            "image": "images/player2.jpg",
+            "bio": "Steve Smith is an Australian cricketer and one of the best batsmen in the world.",
+            "stats": {
+                "matches": 145,
+                "runs": 7540,
+                "average": 61.80
+            }
+        }
+    ]
+    
+    // Load and display players from JSON file
+document.addEventListener('DOMContentLoaded', function() {
+    const featuredPlayers = document.getElementById('featured-players');
+    const searchInput = document.getElementById('search');
+
+    fetch('data/players.json')
+        .then(response => response.json())
+        .then(players => {
+            displayPlayers(players);
+
+            // Search functionality
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                const filteredPlayers = players.filter(player =>
+                    player.name.toLowerCase().includes(searchTerm)
+                );
+                displayPlayers(filteredPlayers);
+            });
+        });
+
+    // Function to display players
+    function displayPlayers(players) {
+        featuredPlayers.innerHTML = ''; // Clear previous content
+        players.forEach(player => {
+            const playerCard = document.createElement('div');
+            playerCard.className = 'player-card';
+            playerCard.innerHTML = `
+                <img src="${player.image}" alt="${player.name}">
+                <h3>${player.name}</h3>
+                <p>${player.bio}</p>
+                <a href="player.html?name=${encodeURIComponent(player.name)}">View Profile</a>
+            `;
+            featuredPlayers.appendChild(playerCard);
+        });
+    }
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const playerName = urlParams.get('name');
+    
+    fetch('data/players.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(players => {
+            const player = players.find(p => p.name === playerName);
+            if (player) {
+                document.getElementById('player-name').textContent = player.name;
+                document.getElementById('player-image').src = player.image;
+                document.getElementById('player-bio').textContent = player.bio;
+                document.getElementById('player-stats').innerHTML = `
+                    <li>Matches: ${player.stats.matches}</li>
+                    <li>Runs: ${player.stats.runs}</li>
+                    <li>Average: ${player.stats.average}</li>
+                `;
+            } else {
+                console.error('Player not found');
+            }
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+});
+
+</script>
+</body>
+</html>

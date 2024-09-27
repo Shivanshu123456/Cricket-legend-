@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Showcase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header, footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .main-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .player-profile {
+            margin: 20px auto;
+            width: 90%;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .player-profile h2 {
+            color: #333;
+            text-align: left;
+        }
+
+        pre {
+            text-align: left;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-left: 5px solid #0073e6;
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #0073e6;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .player-profile {
+                width: 100%;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+        .fan-zone {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-input, .vote-select {
+            margin: 10px 0;
+            width: 80%;
+            padding: 10px;
+        }
+
+        .story-submit {
+            margin-top: 10px;
+        }
+
+        .vote-result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>CRICKET FAN PAGE</h1>
+        <p>Welcome to the ultimate cricket fan zone!</p>
+        Cricket is a bat-and-ball game played between two teams of eleven players each.
+        The game is played on a circular or oval-shaped field with a 22-yard pitch at the center.
+        Each team takes turns to bat and bowl, with the aim of scoring the most runs.
+    </header>
+
+    <div class="main-content">
+        <section class="player-profile">
+            <h2>Sir Donald Bradman</h2>
+            <button onclick="toggleVisibility('bradman')">Show/Hide Profile</button>
+            <pre id="bradman" style="display:none;">
+                <img src="C:\Users\Lenovo\OneDrive - SUSTAINOMETRIC\Desktop\project 3\don bradman.html.jpg" alt="">
+Full Name: Sir Donald George Bradman
+Born: August 27, 1908, in Cootamundra, New South Wales, Australia
+Died: February 25, 2001, in Kensington Park, Adelaide, South Australia
+Nicknames: The Don
+Batting Style: Right-hand bat
+Career Stats:
+- Matches: 52
+- Runs: 6,996
+- Average: 99.94
+Achievements:
+- Highest Test batting average of 99.94, a record that remains unmatched.
+            </pre>
+        </section>
+
+        <section class="player-profile">
+            <h2>Sachin Tendulkar</h2>
+            <button onclick="toggleVisibility('tendulkar')">Show/Hide Profile</button>
+            <pre id="tendulkar" style="display:none;">
+                <img src="C:\Users\Lenovo\OneDrive - SUSTAINOMETRIC\Desktop\project 3\download.jfif" alt="">
+Full Name: Sachin Ramesh Tendulkar
+Born: April 24, 1973, in Mumbai, Maharashtra, India
+Nicknames: Little Master
+Batting Style: Right-hand bat
+Career Stats:
+- Matches: 200
+- Runs: 15,921
+- Centuries: 51
+Achievements:
+- Only player to score 100 international centuries.
+- Most runs in international cricket.
+            </pre>
+        </section>
+
+        <section class="player-profile">
+            <h2>Shane Warne</h2>
+            <button onclick="toggleVisibility('warne')">Show/Hide Profile</button>
+            <pre id="warne" style="display:none;">
+                <img src="C:\Users\Lenovo\OneDrive - SUSTAINOMETRIC\Desktop\project 3\319712.webp" alt="">
+Full Name: Shane Keith Warne
+Born: September 13, 1969, Ferntree Gully, Victoria, Australia
+Role: Bowler
+Bowling Style: Right-arm leg break
+Career Stats:
+- Matches: 145
+- Wickets: 708
+Achievements:
+- First bowler to take 700 Test wickets.
+- Delivered the 'Ball of the Century' in 1993.
+            </pre>
+        </section>
+
+        <section class="player-profile">
+            <h2>Featured Player Locations</h2>
+            <div id="map"></div> <!-- Map container -->
+        </section>
+
+        <!-- Fan Zone Section -->
+        <section class="fan-zone">
+            <h2>Fan Zone</h2>
+            <h3>Share Your Favorite Player Story</h3>
+            <textarea class="story-input" id="story" placeholder="Write your favorite player story here..."></textarea>
+            <button class="story-submit" onclick="submitStory()">Submit Story</button>
+
+            <h3>Vote for Your Greatest Player of All Time</h3>
+            <select class="vote-select" id="voteSelect">
+                <option value="">Select a Player</option>
+                <option value="Bradman">Sir Donald Bradman</option>
+                <option value="Tendulkar">Sachin Tendulkar</option>
+                <option value="Warne">Shane Warne</option>
+            </select>
+            <div class="vote-result" id="voteResult"></div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Top matches and fan zone</p>
+    </footer>
+
+    <script>
+        function toggleVisibility(id) {
+            const element = document.getElementById(id);
+            if (element.style.display === "none") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+
+        // Initialize and add the map
+        function initMap() {
+            var mapCenter = { lat: -20.0, lng: 105.0 }; // Center of featured players globally
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 3,
+                center: mapCenter
+            });
+
+            // Player locations
+            var players = [
+                {
+                    name: "Sir Donald Bradman",
+                    location: { lat: -34.6405, lng: 148.0278 },
+                    info: "Born: Cootamundra, NSW, Australia"
+                },
+                {
+                    name: "Sachin Tendulkar",
+                    location: { lat: 19.0760, lng: 72.8777 },
+                    info: "Born: Mumbai, India"
+                },
+                {
+                    name: "Shane Warne",
+                    location: { lat: -37.8835, lng: 145.2959 },
+                    info: "Born: Ferntree Gully, Victoria, Australia"
+                }
+            ];
+
+            players.forEach(function(player) {
+                var marker = new google.maps.Marker({
+                    position: player.location,
+                    map: map,
+                    title: player.name
+                });
+
+                var infoWindow = new google.maps.InfoWindow({
+                    content: `<h4>${player.name}</h4><p>${player.info}</p>`
+                });
+
+                marker.addListener('click', function() {
+                    infoWindow.open(map, marker);
+                });
+            });
+        }
+
+        // Voting logic
+        let votes = { Bradman: 0, Tendulkar: 0, Warne: 0 };
+
+        // Create and insert the vote button
+        function createVoteButton() {
+            const voteButton = document.createElement('button');
+            voteButton.innerText = 'Vote';
+            voteButton.onclick = submitVote; // Attach the voting function
+            voteButton.style.marginTop = '10px'; // Add some styling
+            document.querySelector('.fan-zone').appendChild(voteButton);
+        }
+
+        // Call this function once the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', createVoteButton);
+
+        function submitVote() {
+            const selectedPlayer = document.getElementById('voteSelect').value;
+
+            if (selectedPlayer) {
+                votes[selectedPlayer]++;
+                document.getElementById('voteResult').innerHTML = `
+                    <h3>Vote Results:</h3>
+                    <p>Sir Donald Bradman: ${votes.Bradman}</p>
+                    <p>Sachin Tendulkar: ${votes.Tendulkar}</p>
+                    <p>Shane Warne: ${votes.Warne}</p>
+                `;
+                document.getElementById('voteSelect').value = ''; // Reset selection
+            } else {
+                alert("Please select a player to vote for.");
+            }
+        }
+
+        // Load the Google Maps API
+        function loadScript() {
+            const script = document.createElement('script');
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap';
+            script.defer = true;
+            document.body.appendChild(script);
+        }
+
+        window.onload = loadScript; // Load Google Maps when the page loads
+    </script>
+</body>
+</html>

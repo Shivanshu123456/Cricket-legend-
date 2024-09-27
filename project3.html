@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Famous Cricketers' Achievements</title>
+    <style>body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    header {
+        background-color: #333;
+        color: white;
+        padding: 20px;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 4px 2px -2px gray;
+    }
+    
+    h1 {
+        margin: 0;
+    }
+    
+    section#cricketers {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 20px;
+    }
+    
+    .cricketer-card {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin: 10px;
+        padding: 15px;
+        width: 300px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        transition: transform 0.2s ease;
+    }
+    
+    .cricketer-card:hover {
+        transform: scale(1.05);
+    }
+    
+    .cricketer-card h2 {
+        color: #333;
+    }
+    
+    .cricketer-card p {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 10px;
+    }
+    
+    .achievements {
+        font-size: 12px;
+        color: #666;
+        list-style-type: none;
+        padding: 0;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Famous Cricketers' Achievements</h1>
+    </header>
+
+    <section id="cricketers">
+        <!-- Cricketers' info will be injected here via JS -->
+    </section>
+
+    <script>// Array of cricketers with their achievements
+        const cricketers = [
+            {
+                name: "Sachin Tendulkar",
+                country: "India",
+                achievements: [
+                    "Most runs in Test and ODI cricket",
+                    "100 International centuries",
+                    "First player to score a double century in ODIs"
+                ]
+            },
+            {
+                name: "Brian Lara",
+                country: "West Indies",
+                achievements: [
+                    "Highest individual score in Test cricket (400*)",
+                    "Highest score in first-class cricket (501*)",
+                    "11,953 Test runs"
+                ]
+            },
+            {
+                name: "Ricky Ponting",
+                country: "Australia",
+                achievements: [
+                    "Three-time World Cup winner (two as captain)",
+                    "27,000+ international runs",
+                    "71 international centuries"
+                ]
+            },
+            {
+                name: "Virat Kohli",
+                country: "India",
+                achievements: [
+                    "Fastest to 8,000, 9,000, 10,000 runs in ODIs",
+                    "Most runs in a single IPL season",
+                    "Over 70 international centuries"
+                ]
+            }
+        ];
+        
+        // Function to create cricketer card
+        function createCricketerCard(cricketer) {
+            const card = document.createElement('div');
+            card.className = 'cricketer-card';
+        
+            const name = document.createElement('h2');
+            name.textContent = cricketer.name;
+        
+            const country = document.createElement('p');
+            country.textContent = `Country: ${cricketer.country}`;
+        
+            const achievements = document.createElement('ul');
+            achievements.className = 'achievements';
+        
+            cricketer.achievements.forEach(achievement => {
+                const li = document.createElement('li');
+                li.textContent = achievement;
+                achievements.appendChild(li);
+            });
+        
+            card.appendChild(name);
+            card.appendChild(country);
+            card.appendChild(achievements);
+        
+            return card;
+        }
+        
+        // Function to display cricketers on the page
+        function displayCricketers() {
+            const cricketersSection = document.getElementById('cricketers');
+            cricketers.forEach(cricketer => {
+                const card = createCricketerCard(cricketer);
+                cricketersSection.appendChild(card);
+            });
+        }
+        
+        // Initialize the page
+        window.onload = displayCricketers;
+        </script>
+</body>
+</html>
